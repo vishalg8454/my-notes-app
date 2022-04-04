@@ -1,0 +1,15 @@
+.app{
+    display: flex;
+    justify-content: center;
+}
+.app-grid-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 2fr 3.5fr 2fr;
+}
+.app-grid-aside{
+    grid-column: 2/3;
+}
+.app-grid-main{
+    grid-column: 4/5;
+    border: 2px solid red;
+}
