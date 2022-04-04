@@ -1,0 +1,86 @@
+.container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.landing-page-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 80%;
+    width: 80%;
+    border-radius: 1.5rem;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+}
+.landing-page-content-container{
+    grid-column: 1/2;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+.landing-page-img-container{
+    display: flex;
+    grid-column: 2/3;
+    justify-content: center;
+}
+.landing-page-img{
+    width: 80%;
+}
+.landing-logo-container{
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+}
+.landing-logo{
+    font-size: 4rem;
+}
+.landing-description{
+    padding-top: 1.5rem;
+}
+.primary{
+    color: var(--color-primary);
+}
+.secondary{
+    color: var(--color-secondary);
+}
+.xx-large{
+    font-size: xx-large;
+}
+.large{
+    font-size: large;
+}
+.bold{
+    font-weight: bold;
+}
+.landing-cta{
+    padding: 0.4rem 1rem;
+    font-size: 1.2rem;
+    border: none;
+    font: inherit;
+    margin-top: 2rem;
+    font-size: x-large;
+    cursor: pointer;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    width: fit-content;
+}
+.landing-cta:hover{
+    background-color: var(--color-secondary);
+}
+.landing-signup{
+    width: fit-content;
+    margin: 0rem;
+    margin-top: 1rem;
+    padding: 0rem;
+}
+@media (max-width:500px) {
+    .container{
+        height: auto;
+    }
+    .landing-page-container{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        box-shadow: none;
+    }
+}
