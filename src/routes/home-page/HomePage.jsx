@@ -1,8 +1,11 @@
 import "./home-page.css";
+import {Note} from "../../components"
 
 const HomePage = ()=>{
     return(
-        <h1>Homepage</h1>
+        <>
+        <Note />
+        </>
     );
 }
 

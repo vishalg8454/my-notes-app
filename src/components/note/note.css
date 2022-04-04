@@ -1,0 +1,52 @@
+.note-container{
+    background-color: white;
+}
+.btn-container{
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-bottom: 2px solid var(--color-background);
+}
+.color-panel{
+    padding: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+}
+.color{
+    cursor: pointer;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-background);
+}
+.ql-toolbar.ql-snow{
+    border: 0;
+    border-bottom: 2px solid var(--color-background);
+}
+.ql-container.ql-snow {
+    border: 0;
+}
+.note-title{
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    padding: 0.75rem;
+    background-color: inherit;
+}
+.note-cta{
+    padding: 0.4rem 1rem;
+    font-size: 1rem;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+.note-btn{
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+}
