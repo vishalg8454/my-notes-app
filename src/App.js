@@ -1,13 +1,14 @@
-import {Routes, Route} from "react-router-dom";
-import {LandingPage} from "./routes";
-import {HomePage} from "./routes";
+import { Routes, Route, Outlet } from "react-router-dom";
+import { LandingPage } from "./routes";
+import { HomePage } from "./routes";
+import { Navbar } from "./components";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage />}/>
-      <Route path="/home" element={<HomePage />}/>
-    </Routes>
+    <>
+      <Navbar />
+      <Outlet />
+    </>
   );
 }
 
