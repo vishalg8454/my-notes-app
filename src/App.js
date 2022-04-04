@@ -1,12 +1,11 @@
-import { Routes, Route, Outlet } from "react-router-dom";
-import { LandingPage } from "./routes";
-import { HomePage } from "./routes";
-import { Navbar } from "./components";
+import { Outlet } from "react-router-dom";
+import { Navbar,NavigationDrawer } from "./components";
 
 function App() {
   return (
     <>
       <Navbar />
+      <NavigationDrawer />
       <Outlet />
     </>
   );
