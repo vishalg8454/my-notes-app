@@ -9,7 +9,6 @@
 }
 .app-grid-main{
     grid-column: 4/5;
-    border: 2px solid red;
 }
 @media (max-width:500px) {
     .app-grid-aside{

@@ -1,6 +1,6 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
-import { Navbar, NavigationDrawer } from "./components";
+import { Navbar, NavigationDrawer,SearchBar } from "./components";
 
 function App() {
   return (
@@ -11,6 +11,7 @@ function App() {
           <NavigationDrawer />
         </div>
         <div className="app-grid-main">
+          <SearchBar />
           <Outlet />
         </div>
       </div>
