@@ -56,6 +56,7 @@ const NavigationDrawer = () => {
           </li>
         </NavLink>
       </ul>
+      <button className="create-new-note-cta">Create New Note</button>
     </aside>
   );
 };
