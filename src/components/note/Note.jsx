@@ -36,9 +36,7 @@ const Note = ({
   };
 
   function saveNoteClickHandler(){
-      console.log(title);
-      console.log(text);
-      console.log(color);
+      
   }
 
   return (

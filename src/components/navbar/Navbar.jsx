@@ -17,7 +17,7 @@ const Navbar = () => {
         </div>
         <div>
           <MenuOutlined
-            onClick={() => setMenuActive(!menuActive)}
+            onClick={(prevState) => setMenuActive(!prevState)}
             fontSize="large"
             className="menu"
           />
