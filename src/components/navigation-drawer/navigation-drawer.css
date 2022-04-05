@@ -2,7 +2,7 @@
   max-width: 15rem;
 }
 .navigation-icon {
-  color: var(--color-secondary);
+  color: inherit;
 }
 .navigation-item {
   display: flex;
