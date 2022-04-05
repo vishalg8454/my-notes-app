@@ -6,7 +6,6 @@ import {Link} from "react-router-dom";
 const LandingPage = () => {
   return (
     <div className="container">
-      <button><Link to="/home">Temporary Button to Homepage for PR review</Link></button>
       <div className="landing-page-container">
         <div className="landing-page-content-container">
           <div className="landing-logo-container">
