@@ -2,7 +2,6 @@ import axios from "axios";
 import { createContext, useContext, useState, useEffect } from "react";
 import { useUser } from "./user-context";
 import { useToast } from "./toast-context";
-import { color } from "@mui/system";
 
 const NoteContext = createContext(null);
 
@@ -13,12 +12,7 @@ const NoteProvider = ({ children }) => {
   const { encodedToken } = useUser();
   const { showToast } = useToast();
 
-  useEffect(() => {
-    console.log(notesList);
-  }, [notesList]);
-
   function addBlankNote() {
-    console.log("adding note");
     if (encodedToken) {
       setNotesList([
         ...notesList,
@@ -34,8 +28,6 @@ const NoteProvider = ({ children }) => {
   }
 
   function saveNoteHandler({ title, _id, color, text }) {
-    console.log("inside save note");
-    console.log(title, _id);
     if (color === "" || text === "") {
       showToast({ message: "Note body cannot be empty", type: "failure" });
       removeBlankNote();
@@ -66,7 +58,6 @@ const NoteProvider = ({ children }) => {
           setNotesList(noteData.data.notes);
           showToast({ message: "Note added successfully", type: "success" });
         } catch (error) {
-          console.log(error);
           showToast({ message: "Error in adding note", type: "failure" });
         }
       })();
@@ -93,7 +84,6 @@ const NoteProvider = ({ children }) => {
           setNotesList(noteData.data.notes);
           showToast({ message: "Note edited successfully", type: "success" });
         } catch (error) {
-          console.log(error);
           showToast({ message: "Error in editing notes", type: "failure" });
         }
       })();
