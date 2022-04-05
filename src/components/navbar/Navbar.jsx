@@ -10,14 +10,18 @@ const Navbar = () => {
     <nav className="nav-bar">
       <div className="nav-bar-container">
         <div>
-          <h1 className="logo">
-            <span className="primary">Note</span>
-            <span className="secondary">Stalk</span>
-          </h1>
+          <Link to="/home" className="logo">
+            <h1 className="logo">
+              <span className="primary">Note</span>
+              <span className="secondary">Stalk</span>
+            </h1>
+          </Link>
         </div>
         <div>
           <MenuOutlined
-            onClick={(prevState) => setMenuActive(!prevState)}
+            onClick={() => {
+              setMenuActive((prevState) => !prevState);
+            }}
             fontSize="large"
             className="menu"
           />

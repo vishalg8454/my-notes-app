@@ -12,6 +12,7 @@
 .logo{
     font-size: 2rem;
     padding: 0.5rem;
+    text-decoration: none;
 }
 .menu{
     margin-right: 1rem;

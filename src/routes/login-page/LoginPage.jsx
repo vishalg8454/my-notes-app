@@ -2,12 +2,14 @@ import "./login-page.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useToast } from "../../context/toast-context";
+import { useUser } from "../../context/user-context";
 import { Toast } from "../../components";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { showToast, show } = useToast();
+  const { loginUser } = useUser();
 
   function setGuestCredential(event) {
     event.preventDefault();
@@ -17,11 +19,7 @@ const LoginPage = () => {
 
   function loginHandler({ event, email, password }) {
     event.preventDefault();
-    showToast({
-      message: "ss",
-      //   message: `Welcome ${userData.data.foundUser.firstName} ${userData.data.foundUser.lastName}`,
-      type: "success",
-    });
+    loginUser({ email: email, password: password });
   }
 
   return (
