@@ -1,0 +1,37 @@
+.navigation-drawer {
+  max-width: 15rem;
+}
+.navigation-icon {
+  color: var(--color-secondary);
+}
+.navigation-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+}
+.navlink {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--color-secondary);
+}
+.navigation-item-text {
+  font-weight: bold;
+  font-size: 1.25rem;
+  padding-left: 0.5rem;
+}
+.create-new-note-cta {
+  width: 100%;
+  padding: 0.4rem 1rem;
+  font-size: 1.2rem;
+  border: none;
+  font: inherit;
+  margin-top: 2rem;
+  font-size: x-large;
+  cursor: pointer;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  width: fit-content;
+}
+.create-new-note-cta:hover {
+  background-color: var(--color-secondary);
+}

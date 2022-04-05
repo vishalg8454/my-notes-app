@@ -1,6 +1,7 @@
 import "./landing-page.css";
 import "../../style.css";
 import note_svg from "../../assets/note_svg.svg";
+import {Link} from "react-router-dom";
 
 const LandingPage = () => {
   return (

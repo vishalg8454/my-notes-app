@@ -1,0 +1,40 @@
+.nav-bar{
+    display: flex;
+    justify-content: center;
+}
+.nav-bar-container{
+    width: 80%;
+    display: flex;
+    height: 4rem;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo{
+    font-size: 2rem;
+    padding: 0.5rem;
+}
+.menu{
+    margin-right: 1rem;
+    visibility: hidden;
+}
+.nav-bar-list{
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+.nav-bar-item{
+    list-style: none;
+    font-size: 1.5rem;
+}
+@media (max-width:500px) {
+    .nav-bar{
+        display: block;
+    }
+    .nav-bar-container{
+        width: 100%;
+    }
+    .menu{
+        visibility: visible;
+    }
+}
