@@ -15,7 +15,7 @@ const NoteProvider = ({ children }) => {
   function addBlankNote() {
     if (encodedToken) {
       setNotesList([
-        ...notesList,
+        ...notesList.filter((note) => note._id != 244),
         { enable: true, title: "", _id: 244, color: "white", text: "" },
       ]);
     } else {
