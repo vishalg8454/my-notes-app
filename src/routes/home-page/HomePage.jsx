@@ -6,6 +6,7 @@ const HomePage = () => {
   const { notesList } = useNote();
   return (
     <>
+    {notesList.length === 0 && <h2 className="show-empty-header">No Notes to show. </h2>}
       {notesList.map(({ enable, title, _id, color, text, dateTime }) => (
         <Note
           key={_id}
