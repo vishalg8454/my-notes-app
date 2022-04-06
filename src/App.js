@@ -20,7 +20,7 @@ function App() {
         <div className="app-grid-main">
           <SearchBar />
           <button
-            class="btn btn-float-action fab"
+            className="btn btn-float-action fab"
             onClick={() => {
               navigate("/home");
               addBlankNote();

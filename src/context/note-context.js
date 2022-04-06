@@ -15,9 +15,36 @@ const NoteProvider = ({ children }) => {
 
   function addBlankNote() {
     if (encodedToken) {
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      const date = new Date();
       setNotesList([
         ...notesList.filter((note) => note._id != 244),
-        { enable: true, title: "", _id: 244, color: "white", text: "" },
+        {
+          enable: true,
+          title: "",
+          _id: 244,
+          color: "white",
+          text: "",
+          dateTime: {
+            hour: date.getHours(),
+            minutes: date.getMinutes(),
+            day: date.getDate(),
+            month: months[date.getMonth()],
+          },
+        },
       ]);
     } else {
       showToast({ message: "Login to add notes", type: "failure" });
@@ -28,27 +55,45 @@ const NoteProvider = ({ children }) => {
     setNotesList(notesList.filter((note) => note._id !== 244));
   }
 
-  function saveNoteHandler({ title, _id, color, text }) {
+  function saveNoteHandler({ title, _id, color, text, dateTime }) {
     if (title === "" || text === "") {
       showToast({ message: "Note body cannot be empty", type: "failure" });
       removeBlankNote();
       return;
     }
     if (_id === 244) {
-      postNote({ title: title, _id: _id, color: color, text: text });
+      postNote({
+        title: title,
+        _id: _id,
+        color: color,
+        text: text,
+        dateTime: dateTime,
+      });
     } else {
-      editNote({ title: title, _id: _id, color: color, text: text });
+      editNote({
+        title: title,
+        _id: _id,
+        color: color,
+        text: text,
+        dateTime: dateTime,
+      });
     }
   }
 
-  function postNote({ title, _id, color, text }) {
+  function postNote({ title, _id, color, text, dateTime }) {
     if (encodedToken) {
       (async () => {
         try {
           const noteData = await axios.post(
             `/api/notes`,
             {
-              note: { title: title, enable: false, color: color, text: text },
+              note: {
+                title: title,
+                enable: false,
+                color: color,
+                text: text,
+                dateTime: dateTime,
+              },
             },
             {
               headers: {
@@ -67,14 +112,20 @@ const NoteProvider = ({ children }) => {
     }
   }
 
-  function editNote({ title, _id, color, text }) {
+  function editNote({ title, _id, color, text, dateTime }) {
     if (encodedToken) {
       (async () => {
         try {
           const noteData = await axios.post(
             `/api/notes/${_id}`,
             {
-              note: { title: title, enable: false, color: color, text: text },
+              note: {
+                title: title,
+                enable: false,
+                color: color,
+                text: text,
+                dateTime: dateTime,
+              },
             },
             {
               headers: {
@@ -93,14 +144,20 @@ const NoteProvider = ({ children }) => {
     }
   }
 
-  function archiveNote({ title, _id, color, text }) {
+  function archiveNote({ title, _id, color, text, dateTime }) {
     if (encodedToken) {
       (async () => {
         try {
           const noteData = await axios.post(
             `/api/notes/archives/${_id}`,
             {
-              note: { title: title, enable: false, color: color, text: text },
+              note: {
+                title: title,
+                enable: false,
+                color: color,
+                text: text,
+                dateTime: dateTime,
+              },
             },
             {
               headers: {
@@ -120,7 +177,7 @@ const NoteProvider = ({ children }) => {
     }
   }
 
-  function unarchiveNote({ title, _id, color, text }) {
+  function unarchiveNote({ title, _id, color, text, dateTime: dateTime }) {
     if (encodedToken) {
       (async () => {
         try {
@@ -135,7 +192,10 @@ const NoteProvider = ({ children }) => {
           );
           setArchiveList(noteData.data.archives);
           setNotesList(noteData.data.notes);
-          showToast({ message: "Note Unarchived successfully", type: "success" });
+          showToast({
+            message: "Note Unarchived successfully",
+            type: "success",
+          });
         } catch (error) {
           showToast({ message: "Error in Unarchiving notes", type: "failure" });
         }
@@ -145,18 +205,15 @@ const NoteProvider = ({ children }) => {
     }
   }
 
-  function deleteNote({ title, _id, color, text }){
+  function deleteNote({ title, _id, color, text, dateTime: dateTime }) {
     if (encodedToken) {
       (async () => {
         try {
-          const noteData = await axios.delete(
-            `/api/notes/${_id}`,
-            {
-              headers: {
-                authorization: encodedToken,
-              },
-            }
-          );
+          const noteData = await axios.delete(`/api/notes/${_id}`, {
+            headers: {
+              authorization: encodedToken,
+            },
+          });
           setNotesList(noteData.data.notes);
           showToast({ message: "Note Deleted successfully", type: "success" });
         } catch (error) {
@@ -168,18 +225,15 @@ const NoteProvider = ({ children }) => {
     }
   }
 
-  function deleteArchiveNote({ title, _id, color, text }){
+  function deleteArchiveNote({ title, _id, color, text, dateTime: dateTime }) {
     if (encodedToken) {
       (async () => {
         try {
-          const noteData = await axios.delete(
-            `/api/archives/delete/${_id}`,
-            {
-              headers: {
-                authorization: encodedToken,
-              },
-            }
-          );
+          const noteData = await axios.delete(`/api/archives/delete/${_id}`, {
+            headers: {
+              authorization: encodedToken,
+            },
+          });
           setArchiveList(noteData.data.archives);
           showToast({ message: "Note Deleted successfully", type: "success" });
         } catch (error) {

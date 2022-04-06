@@ -16,13 +16,17 @@ const Note = ({
   noteColor,
   noteTitle,
   isArchive,
+  dateTime,
 }) => {
   const [text, setText] = useState(noteText);
   const [enable, setEnable] = useState(noteEnable);
   const [color, setColor] = useState(noteColor);
   const [title, setTitle] = useState(noteTitle);
 
+  const {hour,minutes,day,month} = dateTime;
+
   const inputRef = useRef();
+
   const {
     saveNoteHandler,
     archiveNote,
@@ -64,6 +68,9 @@ const Note = ({
         ref={inputRef}
       />
       <div className="btn-container">
+        <div className="date-container">
+          <span className="date-txt">{`Created at ${hour}:${minutes} , ${day} ${month}`}</span>
+        </div>
         {enable && (
           <button
             className="note-cta"
@@ -74,13 +81,14 @@ const Note = ({
                 _id: _id,
                 color: color,
                 text: text,
+                dateTime: dateTime,
               });
             }}
           >
             Save Note
           </button>
         )}
-        {!enable && !isArchive &&(
+        {!enable && !isArchive && (
           <button
             className="note-btn"
             onClick={() => {
@@ -99,6 +107,7 @@ const Note = ({
                 _id: _id,
                 color: color,
                 text: text,
+                dateTime: dateTime,
               })
             }
           >
@@ -108,7 +117,13 @@ const Note = ({
           <button
             className="note-btn"
             onClick={() =>
-              archiveNote({ title: title, _id: _id, color: color, text: text })
+              archiveNote({
+                title: title,
+                _id: _id,
+                color: color,
+                text: text,
+                dateTime: dateTime,
+              })
             }
           >
             <ArchiveOutlinedIcon />
@@ -124,8 +139,15 @@ const Note = ({
                   _id: _id,
                   color: color,
                   text: text,
+                  dateTime: dateTime,
                 })
-              : deleteNote({ title: title, _id: _id, color: color, text: text })
+              : deleteNote({
+                  title: title,
+                  _id: _id,
+                  color: color,
+                  text: text,
+                  dateTime: dateTime,
+                })
           }
         >
           <DeleteOutlinedIcon style={{ cursor: "pointer" }} />

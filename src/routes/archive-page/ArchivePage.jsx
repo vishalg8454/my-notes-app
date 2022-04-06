@@ -7,7 +7,7 @@ const ArchivePage = () => {
   return (
     <>
       {archiveList.length === 0 && <h2>Archive list is empty</h2>}
-      {archiveList.map(({ enable, title, _id, color, text }) => (
+      {archiveList.map(({ enable, title, _id, color, text,dateTime }) => (
         <Note
           key={_id}
           noteEnable={enable}
@@ -16,6 +16,7 @@ const ArchivePage = () => {
           noteColor={color}
           noteText={text}
           isArchive={true}
+          dateTime={dateTime}
         />
       ))}
     </>

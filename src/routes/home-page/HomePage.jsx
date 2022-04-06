@@ -6,7 +6,7 @@ const HomePage = () => {
   const { notesList } = useNote();
   return (
     <>
-      {notesList.map(({ enable, title, _id, color, text }) => (
+      {notesList.map(({ enable, title, _id, color, text, dateTime }) => (
         <Note
           key={_id}
           noteEnable={enable}
@@ -15,6 +15,7 @@ const HomePage = () => {
           noteColor={color}
           noteText={text}
           isArchive={false}
+          dateTime={dateTime}
         />
       ))}
     </>

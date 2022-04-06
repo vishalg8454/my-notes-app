@@ -51,3 +51,11 @@
     background: transparent;
     border: none;
 }
+.date-container{
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+}
+.date-txt{
+    font-size: small;
+}
