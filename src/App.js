@@ -1,5 +1,5 @@
 import "./App.css";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Navbar, NavigationDrawer, SearchBar, Toast } from "./components";
 import { useToast } from "./context/toast-context";
 import { useNote } from "./context/note-context";
@@ -7,6 +7,8 @@ import { useNote } from "./context/note-context";
 function App() {
   const { show } = useToast();
   const { addBlankNote } = useNote();
+  let navigate = useNavigate();
+
   return (
     <>
       {show && <Toast />}
@@ -17,7 +19,13 @@ function App() {
         </div>
         <div className="app-grid-main">
           <SearchBar />
-          <button class="btn btn-float-action fab" onClick={addBlankNote}>
+          <button
+            class="btn btn-float-action fab"
+            onClick={() => {
+              navigate("/home");
+              addBlankNote();
+            }}
+          >
             +
           </button>
           <Outlet />

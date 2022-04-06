@@ -4,10 +4,11 @@ import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useNote } from "../../context/note-context";
 
 const NavigationDrawer = () => {
+  let navigate = useNavigate();
   const { addBlankNote } = useNote();
   let activeStyle = {
     textDecoration: "underline",
@@ -15,6 +16,7 @@ const NavigationDrawer = () => {
   };
 
   function addNoteHandler() {
+    navigate("/home");
     addBlankNote();
   }
   return (

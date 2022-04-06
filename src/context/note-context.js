@@ -29,7 +29,7 @@ const NoteProvider = ({ children }) => {
   }
 
   function saveNoteHandler({ title, _id, color, text }) {
-    if (color === "" || text === "") {
+    if (title === "" || text === "") {
       showToast({ message: "Note body cannot be empty", type: "failure" });
       removeBlankNote();
       return;

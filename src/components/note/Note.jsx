@@ -80,7 +80,7 @@ const Note = ({
             Save Note
           </button>
         )}
-        {!enable && (
+        {!enable && !isArchive &&(
           <button
             className="note-btn"
             onClick={() => {
