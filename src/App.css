@@ -10,6 +10,15 @@
 .app-grid-main{
     grid-column: 4/5;
 }
+.fab{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: 2.5rem;
+    width: 4rem;
+    height: 4rem;
+    display: none;
+}
 @media (max-width:500px) {
     .app-grid-aside{
         display: none;
@@ -17,5 +26,8 @@
     .app-grid-main{
         grid-column: 1/6;
         margin: 1rem;
+    }
+    .fab{
+        display: block;
     }
 }

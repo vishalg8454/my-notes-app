@@ -1,0 +1,8 @@
+.alert{
+    position: fixed;
+    top: 0rem;
+    right: 0rem;
+    margin-top: 2rem;
+    z-index: 21;
+    padding: 1rem;
+}

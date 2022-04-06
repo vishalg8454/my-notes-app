@@ -6,20 +6,16 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import "react-quill/dist/quill.snow.css";
 import "./note.css";
+import { useNote } from "../../context/note-context";
 
-const Note = ({
-  _id,
-  noteEnable = false,
-  noteText = "",
-  noteColor = "white",
-  noteTitle = "",
-}) => {
+const Note = ({ _id, noteEnable, noteText, noteColor, noteTitle }) => {
   const [text, setText] = useState(noteText);
   const [enable, setEnable] = useState(noteEnable);
   const [color, setColor] = useState(noteColor);
   const [title, setTitle] = useState(noteTitle);
 
   const inputRef = useRef();
+  const { saveNoteHandler } = useNote();
 
   const modules = {
     toolbar: [
@@ -34,10 +30,6 @@ const Note = ({
   const noModules = {
     toolbar: false,
   };
-
-  function saveNoteClickHandler(){
-      
-  }
 
   return (
     <div className="note-container" style={{ backgroundColor: color }}>
@@ -59,12 +51,28 @@ const Note = ({
       />
       <div className="btn-container">
         {enable && (
-          <button className="note-cta" onClick={() => setEnable(false)}>
+          <button
+            className="note-cta"
+            onClick={() => {
+              setEnable(false);
+              saveNoteHandler({
+                title: title,
+                _id: _id,
+                color: color,
+                text: text,
+              });
+            }}
+          >
             Save Note
           </button>
         )}
         {!enable && (
-          <button className="note-btn" onClick={() => {setEnable(true);saveNoteClickHandler()}}>
+          <button
+            className="note-btn"
+            onClick={() => {
+              setEnable(true);
+            }}
+          >
             <EditOutlinedIcon />
           </button>
         )}

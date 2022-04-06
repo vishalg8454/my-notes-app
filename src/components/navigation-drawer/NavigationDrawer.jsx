@@ -5,12 +5,26 @@ import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { NavLink } from "react-router-dom";
+import { useNote } from "../../context/note-context";
 
 const NavigationDrawer = () => {
+  const { addBlankNote } = useNote();
+  let activeStyle = {
+    textDecoration: "underline",
+    color: "#d54a31",
+  };
+
+  function addNoteHandler(){
+      addBlankNote();
+  }
   return (
     <aside className="navigation-drawer">
       <ul>
-        <NavLink to="/home" className="navlink">
+        <NavLink
+          to="/home"
+          className="navlink"
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        >
           <li className="navigation-item">
             <HomeOutlinedIcon
               className="navigation-icon"
@@ -56,7 +70,7 @@ const NavigationDrawer = () => {
           </li>
         </NavLink>
       </ul>
-      <button className="create-new-note-cta">Create New Note</button>
+      <button className="create-new-note-cta" onClick={addNoteHandler}>Create New Note</button>
     </aside>
   );
 };

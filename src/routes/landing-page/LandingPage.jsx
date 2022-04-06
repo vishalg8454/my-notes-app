@@ -1,7 +1,7 @@
 import "./landing-page.css";
 import "../../style.css";
 import note_svg from "../../assets/note_svg.svg";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
@@ -19,9 +19,11 @@ const LandingPage = () => {
             efficiency without any efforts.
           </p>
           <button className="landing-cta">Join Now</button>
-          <button className="btn btn-link landing-signup">
-            Already have an account?
-          </button>
+          <Link to="/login">
+            <button className="btn btn-link landing-signup">
+              Already have an account?
+            </button>
+          </Link>
         </div>
         <div className="landing-page-img-container">
           <img className="landing-page-img" src={note_svg} />
