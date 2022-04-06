@@ -145,6 +145,51 @@ const NoteProvider = ({ children }) => {
     }
   }
 
+  function deleteNote({ title, _id, color, text }){
+    if (encodedToken) {
+      (async () => {
+        try {
+          const noteData = await axios.delete(
+            `/api/notes/${_id}`,
+            {
+              headers: {
+                authorization: encodedToken,
+              },
+            }
+          );
+          setNotesList(noteData.data.notes);
+          showToast({ message: "Note Deleted successfully", type: "success" });
+        } catch (error) {
+          showToast({ message: "Error in Deleting notes", type: "failure" });
+        }
+      })();
+    } else {
+      showToast({ message: "Login to Delete notes", type: "failure" });
+    }
+  }
+
+  function deleteArchiveNote({ title, _id, color, text }){
+    if (encodedToken) {
+      (async () => {
+        try {
+          const noteData = await axios.delete(
+            `/api/archives/delete/${_id}`,
+            {
+              headers: {
+                authorization: encodedToken,
+              },
+            }
+          );
+          setArchiveList(noteData.data.archives);
+          showToast({ message: "Note Deleted successfully", type: "success" });
+        } catch (error) {
+          showToast({ message: "Error in Deleting notes", type: "failure" });
+        }
+      })();
+    } else {
+      showToast({ message: "Login to Delete notes", type: "failure" });
+    }
+  }
 
   return (
     <NoteContext.Provider
@@ -155,6 +200,8 @@ const NoteProvider = ({ children }) => {
         saveNoteHandler,
         archiveNote,
         unarchiveNote,
+        deleteNote,
+        deleteArchiveNote,
       }}
     >
       {children}

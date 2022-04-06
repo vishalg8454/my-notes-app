@@ -23,7 +23,13 @@ const Note = ({
   const [title, setTitle] = useState(noteTitle);
 
   const inputRef = useRef();
-  const { saveNoteHandler, archiveNote, unarchiveNote } = useNote();
+  const {
+    saveNoteHandler,
+    archiveNote,
+    unarchiveNote,
+    deleteNote,
+    deleteArchiveNote,
+  } = useNote();
 
   const modules = {
     toolbar: [
@@ -109,7 +115,19 @@ const Note = ({
           </button>
         )}
 
-        <button className="note-btn">
+        <button
+          className="note-btn"
+          onClick={() =>
+            isArchive
+              ? deleteArchiveNote({
+                  title: title,
+                  _id: _id,
+                  color: color,
+                  text: text,
+                })
+              : deleteNote({ title: title, _id: _id, color: color, text: text })
+          }
+        >
           <DeleteOutlinedIcon style={{ cursor: "pointer" }} />
         </button>
       </div>
