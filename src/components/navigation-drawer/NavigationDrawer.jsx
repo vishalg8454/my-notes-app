@@ -14,8 +14,8 @@ const NavigationDrawer = () => {
     color: "#d54a31",
   };
 
-  function addNoteHandler(){
-      addBlankNote();
+  function addNoteHandler() {
+    addBlankNote();
   }
   return (
     <aside className="navigation-drawer">
@@ -42,7 +42,11 @@ const NavigationDrawer = () => {
             <span className="navigation-item-text">Labels</span>
           </li>
         </NavLink>
-        <NavLink to="/archive" className="navlink">
+        <NavLink
+          to="/archive"
+          className="navlink"
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        >
           <li className="navigation-item">
             <ArchiveOutlinedIcon
               className="navigation-icon"
@@ -70,7 +74,9 @@ const NavigationDrawer = () => {
           </li>
         </NavLink>
       </ul>
-      <button className="create-new-note-cta" onClick={addNoteHandler}>Create New Note</button>
+      <button className="create-new-note-cta" onClick={addNoteHandler}>
+        Create New Note
+      </button>
     </aside>
   );
 };
