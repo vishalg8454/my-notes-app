@@ -14,6 +14,7 @@ const HomePage = () => {
           _id={_id}
           noteColor={color}
           noteText={text}
+          isArchive={false}
         />
       ))}
     </>

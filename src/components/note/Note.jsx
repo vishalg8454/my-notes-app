@@ -2,20 +2,28 @@ import React, { useEffect, useRef } from "react";
 import ReactQuill from "react-quill";
 import { useState } from "react";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
+import UnarchiveOutlinedIcon from "@mui/icons-material/UnarchiveOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import "react-quill/dist/quill.snow.css";
 import "./note.css";
 import { useNote } from "../../context/note-context";
 
-const Note = ({ _id, noteEnable, noteText, noteColor, noteTitle }) => {
+const Note = ({
+  _id,
+  noteEnable,
+  noteText,
+  noteColor,
+  noteTitle,
+  isArchive,
+}) => {
   const [text, setText] = useState(noteText);
   const [enable, setEnable] = useState(noteEnable);
   const [color, setColor] = useState(noteColor);
   const [title, setTitle] = useState(noteTitle);
 
   const inputRef = useRef();
-  const { saveNoteHandler } = useNote();
+  const { saveNoteHandler, archiveNote, unarchiveNote } = useNote();
 
   const modules = {
     toolbar: [
@@ -76,9 +84,31 @@ const Note = ({ _id, noteEnable, noteText, noteColor, noteTitle }) => {
             <EditOutlinedIcon />
           </button>
         )}
-        <button className="note-btn">
-          <ArchiveOutlinedIcon />
-        </button>
+        {isArchive ? (
+          <button
+            className="note-btn"
+            onClick={() =>
+              unarchiveNote({
+                title: title,
+                _id: _id,
+                color: color,
+                text: text,
+              })
+            }
+          >
+            <UnarchiveOutlinedIcon />
+          </button>
+        ) : (
+          <button
+            className="note-btn"
+            onClick={() =>
+              archiveNote({ title: title, _id: _id, color: color, text: text })
+            }
+          >
+            <ArchiveOutlinedIcon />
+          </button>
+        )}
+
         <button className="note-btn">
           <DeleteOutlinedIcon style={{ cursor: "pointer" }} />
         </button>

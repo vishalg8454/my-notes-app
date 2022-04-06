@@ -9,6 +9,7 @@ const useNote = () => useContext(NoteContext);
 
 const NoteProvider = ({ children }) => {
   const [notesList, setNotesList] = useState([]);
+  const [archiveList, setArchiveList] = useState([]);
   const { encodedToken } = useUser();
   const { showToast } = useToast();
 
@@ -92,8 +93,70 @@ const NoteProvider = ({ children }) => {
     }
   }
 
+  function archiveNote({ title, _id, color, text }) {
+    if (encodedToken) {
+      (async () => {
+        try {
+          const noteData = await axios.post(
+            `/api/notes/archives/${_id}`,
+            {
+              note: { title: title, enable: false, color: color, text: text },
+            },
+            {
+              headers: {
+                authorization: encodedToken,
+              },
+            }
+          );
+          setArchiveList(noteData.data.archives);
+          setNotesList(noteData.data.notes);
+          showToast({ message: "Note archived successfully", type: "success" });
+        } catch (error) {
+          showToast({ message: "Error in archiving notes", type: "failure" });
+        }
+      })();
+    } else {
+      showToast({ message: "Login to archive notes", type: "failure" });
+    }
+  }
+
+  function unarchiveNote({ title, _id, color, text }) {
+    if (encodedToken) {
+      (async () => {
+        try {
+          const noteData = await axios.post(
+            `/api/archives/restore/${_id}`,
+            {},
+            {
+              headers: {
+                authorization: encodedToken,
+              },
+            }
+          );
+          setArchiveList(noteData.data.archives);
+          setNotesList(noteData.data.notes);
+          showToast({ message: "Note Unarchived successfully", type: "success" });
+        } catch (error) {
+          showToast({ message: "Error in Unarchiving notes", type: "failure" });
+        }
+      })();
+    } else {
+      showToast({ message: "Login to Unarchive notes", type: "failure" });
+    }
+  }
+
+
   return (
-    <NoteContext.Provider value={{ notesList, addBlankNote, saveNoteHandler }}>
+    <NoteContext.Provider
+      value={{
+        notesList,
+        archiveList,
+        addBlankNote,
+        saveNoteHandler,
+        archiveNote,
+        unarchiveNote,
+      }}
+    >
       {children}
     </NoteContext.Provider>
   );
