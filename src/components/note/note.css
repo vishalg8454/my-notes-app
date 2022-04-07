@@ -59,3 +59,26 @@
 .date-txt{
     font-size: small;
 }
+.label-container{
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem 0.75rem;
+    border-bottom: 2px solid var(--color-background);
+}
+.label-ul{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+.label-li{
+    display: flex;
+    align-items: flex-start;
+    gap: 2px;
+}
+.label-chip-container{
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem 0.75rem;
+    border-bottom: 2px solid var(--color-background);
+}

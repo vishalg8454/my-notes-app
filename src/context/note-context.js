@@ -44,6 +44,7 @@ const NoteProvider = ({ children }) => {
             day: date.getDate(),
             month: months[date.getMonth()],
           },
+          tags: [],
         },
       ]);
     } else {
@@ -55,7 +56,7 @@ const NoteProvider = ({ children }) => {
     setNotesList(notesList.filter((note) => note._id !== 244));
   }
 
-  function saveNoteHandler({ title, _id, color, text, dateTime }) {
+  function saveNoteHandler({ title, _id, color, text, dateTime, tags }) {
     if (title === "" || text === "") {
       showToast({ message: "Note body cannot be empty", type: "failure" });
       removeBlankNote();
@@ -68,6 +69,7 @@ const NoteProvider = ({ children }) => {
         color: color,
         text: text,
         dateTime: dateTime,
+        tags: tags,
       });
     } else {
       editNote({
@@ -76,11 +78,12 @@ const NoteProvider = ({ children }) => {
         color: color,
         text: text,
         dateTime: dateTime,
+        tags: tags,
       });
     }
   }
 
-  function postNote({ title, _id, color, text, dateTime }) {
+  function postNote({ title, _id, color, text, dateTime, tags }) {
     if (encodedToken) {
       (async () => {
         try {
@@ -93,6 +96,7 @@ const NoteProvider = ({ children }) => {
                 color: color,
                 text: text,
                 dateTime: dateTime,
+                tags: tags,
               },
             },
             {
@@ -112,7 +116,7 @@ const NoteProvider = ({ children }) => {
     }
   }
 
-  function editNote({ title, _id, color, text, dateTime }) {
+  function editNote({ title, _id, color, text, dateTime, tags }) {
     if (encodedToken) {
       (async () => {
         try {
@@ -125,6 +129,7 @@ const NoteProvider = ({ children }) => {
                 color: color,
                 text: text,
                 dateTime: dateTime,
+                tags: tags,
               },
             },
             {
@@ -144,7 +149,7 @@ const NoteProvider = ({ children }) => {
     }
   }
 
-  function archiveNote({ title, _id, color, text, dateTime }) {
+  function archiveNote({ title, _id, color, text, dateTime ,tags}) {
     if (encodedToken) {
       (async () => {
         try {
@@ -157,6 +162,7 @@ const NoteProvider = ({ children }) => {
                 color: color,
                 text: text,
                 dateTime: dateTime,
+                tags:tags
               },
             },
             {
