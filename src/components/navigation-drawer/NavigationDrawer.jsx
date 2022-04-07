@@ -6,10 +6,24 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useNote } from "../../context/note-context";
+import { useEffect, useState } from "react";
 
 const NavigationDrawer = () => {
+  const [sortState, setSortState] = useState("");
+
   let navigate = useNavigate();
-  const { addBlankNote } = useNote();
+
+  const { addBlankNote, sortNewToOld, sortOldToNew } = useNote();
+
+  useEffect(() => {
+    if(sortState === "new"){
+      sortNewToOld();
+    }
+    if(sortState === "old"){
+      sortOldToNew()
+    }
+  }, [sortState]);
+
   let activeStyle = {
     textDecoration: "underline",
     color: "#d54a31",
@@ -79,6 +93,30 @@ const NavigationDrawer = () => {
       <button className="create-new-note-cta" onClick={addNoteHandler}>
         Create New Note
       </button>
+
+      <div className="sort-container">
+        <p>Sort by - </p>
+        <div className="sort-div">
+          <input
+            id="newtoold"
+            type="radio"
+            name="sort"
+            value="new"
+            onChange={(e) => setSortState(e.target.value)}
+          />
+          <label htmlFor="newtoold">{" Date - Newer to Older"}</label>
+        </div>
+        <div className="sort-div">
+          <input
+            id="oldtonew"
+            type="radio"
+            name="sort"
+            value="old"
+            onChange={(e) => setSortState(e.target.value)}
+          />
+          <label htmlFor="oldtonew">{" Date - Older to Newer"}</label>
+        </div>
+      </div>
     </aside>
   );
 };

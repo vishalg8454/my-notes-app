@@ -2,12 +2,15 @@ import axios from "axios";
 import { createContext, useContext, useState, useEffect } from "react";
 import { useUser } from "./user-context";
 import { useToast } from "./toast-context";
+import {useNavigate} from "react-router-dom";
 
 const NoteContext = createContext(null);
 
 const useNote = () => useContext(NoteContext);
 
 const NoteProvider = ({ children }) => {
+
+  let navigate = useNavigate();
   const [notesList, setNotesList] = useState([]);
   const [archiveList, setArchiveList] = useState([]);
   const { encodedToken } = useUser();
@@ -30,6 +33,7 @@ const NoteProvider = ({ children }) => {
         "December",
       ];
       const date = new Date();
+      1;
       setNotesList([
         ...notesList.filter((note) => note._id != 244),
         {
@@ -38,12 +42,7 @@ const NoteProvider = ({ children }) => {
           _id: 244,
           color: "white",
           text: "",
-          dateTime: {
-            hour: date.getHours(),
-            minutes: date.getMinutes(),
-            day: date.getDate(),
-            month: months[date.getMonth()],
-          },
+          dateTime: date.toLocaleString(),
           tags: [],
         },
       ]);
@@ -149,7 +148,7 @@ const NoteProvider = ({ children }) => {
     }
   }
 
-  function archiveNote({ title, _id, color, text, dateTime ,tags}) {
+  function archiveNote({ title, _id, color, text, dateTime, tags }) {
     if (encodedToken) {
       (async () => {
         try {
@@ -162,7 +161,7 @@ const NoteProvider = ({ children }) => {
                 color: color,
                 text: text,
                 dateTime: dateTime,
-                tags:tags
+                tags: tags,
               },
             },
             {
@@ -251,6 +250,20 @@ const NoteProvider = ({ children }) => {
     }
   }
 
+  function sortNewToOld() {
+    const temp = notesList;
+    temp.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
+    setNotesList(() => temp);
+    navigate("/home");
+  }
+
+  function sortOldToNew() {
+    const temp = notesList;
+    temp.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
+    setNotesList(() => temp);
+    navigate("/home");
+  }
+
   return (
     <NoteContext.Provider
       value={{
@@ -262,6 +275,8 @@ const NoteProvider = ({ children }) => {
         unarchiveNote,
         deleteNote,
         deleteArchiveNote,
+        sortNewToOld,
+        sortOldToNew,
       }}
     >
       {children}

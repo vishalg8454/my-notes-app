@@ -33,7 +33,7 @@ const Note = ({
   const [title, setTitle] = useState(noteTitle);
   const [tags, setTags] = useState(noteTags);
 
-  const { hour, minutes, day, month } = dateTime;
+  // const { hour, minutes, day, month } = dateTime;
 
   const inputRef = useRef();
 
@@ -89,7 +89,7 @@ const Note = ({
 
       <div className="btn-container">
         <div className="date-container">
-          <span className="date-txt">{`Created at ${hour}:${minutes} , ${day} ${month}`}</span>
+          <span className="date-txt">{`Created at: ${dateTime}`}</span>
         </div>
         {enable && (
           <button
