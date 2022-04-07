@@ -2,14 +2,13 @@ import axios from "axios";
 import { createContext, useContext, useState, useEffect } from "react";
 import { useUser } from "./user-context";
 import { useToast } from "./toast-context";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NoteContext = createContext(null);
 
 const useNote = () => useContext(NoteContext);
 
 const NoteProvider = ({ children }) => {
-
   let navigate = useNavigate();
   const [notesList, setNotesList] = useState([]);
   const [archiveList, setArchiveList] = useState([]);
@@ -18,22 +17,7 @@ const NoteProvider = ({ children }) => {
 
   function addBlankNote() {
     if (encodedToken) {
-      const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
       const date = new Date();
-      1;
       setNotesList([
         ...notesList.filter((note) => note._id != 244),
         {
