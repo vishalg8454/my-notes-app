@@ -35,3 +35,9 @@
 .create-new-note-cta:hover {
   background-color: var(--color-secondary);
 }
+.sort-container{
+  padding: 1rem;
+}
+.sort-div{
+  padding: 0.5rem 0.25rem;
+}

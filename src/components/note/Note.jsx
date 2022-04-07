@@ -2,20 +2,48 @@ import React, { useEffect, useRef } from "react";
 import ReactQuill from "react-quill";
 import { useState } from "react";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
+import UnarchiveOutlinedIcon from "@mui/icons-material/UnarchiveOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import "react-quill/dist/quill.snow.css";
 import "./note.css";
 import { useNote } from "../../context/note-context";
+import { LabelChip } from "../../components";
 
-const Note = ({ _id, noteEnable, noteText, noteColor, noteTitle }) => {
+const arr = [
+  { value: "Urgent", id: 1 },
+  { value: "Work", id: 2 },
+  { value: "Office", id: 3 },
+  { value: "To-do", id: 4 },
+];
+
+const Note = ({
+  _id,
+  noteEnable,
+  noteText,
+  noteColor,
+  noteTitle,
+  isArchive,
+  dateTime,
+  noteTags,
+}) => {
   const [text, setText] = useState(noteText);
   const [enable, setEnable] = useState(noteEnable);
   const [color, setColor] = useState(noteColor);
   const [title, setTitle] = useState(noteTitle);
+  const [tags, setTags] = useState(noteTags);
+
+  // const { hour, minutes, day, month } = dateTime;
 
   const inputRef = useRef();
-  const { saveNoteHandler } = useNote();
+
+  const {
+    saveNoteHandler,
+    archiveNote,
+    unarchiveNote,
+    deleteNote,
+    deleteArchiveNote,
+  } = useNote();
 
   const modules = {
     toolbar: [
@@ -31,6 +59,15 @@ const Note = ({ _id, noteEnable, noteText, noteColor, noteTitle }) => {
     toolbar: false,
   };
 
+  function checkBoxHandler(event) {
+    const include = event.target.checked;
+    const label = event.target.name;
+    if (include) {
+      setTags([...tags, label]);
+    } else {
+      setTags([...tags.filter((tag) => tag !== label)]);
+    }
+  }
   return (
     <div className="note-container" style={{ backgroundColor: color }}>
       <input
@@ -49,7 +86,11 @@ const Note = ({ _id, noteEnable, noteText, noteColor, noteTitle }) => {
         placeholder={"Write your note here..."}
         ref={inputRef}
       />
+
       <div className="btn-container">
+        <div className="date-container">
+          <span className="date-txt">{`Created at: ${dateTime}`}</span>
+        </div>
         {enable && (
           <button
             className="note-cta"
@@ -60,13 +101,15 @@ const Note = ({ _id, noteEnable, noteText, noteColor, noteTitle }) => {
                 _id: _id,
                 color: color,
                 text: text,
+                dateTime: dateTime,
+                tags: tags,
               });
             }}
           >
             Save Note
           </button>
         )}
-        {!enable && (
+        {!enable && !isArchive && (
           <button
             className="note-btn"
             onClick={() => {
@@ -76,13 +119,88 @@ const Note = ({ _id, noteEnable, noteText, noteColor, noteTitle }) => {
             <EditOutlinedIcon />
           </button>
         )}
-        <button className="note-btn">
-          <ArchiveOutlinedIcon />
-        </button>
-        <button className="note-btn">
+        {isArchive ? (
+          <button
+            className="note-btn"
+            onClick={() =>
+              unarchiveNote({
+                title: title,
+                _id: _id,
+                color: color,
+                text: text,
+                dateTime: dateTime,
+              })
+            }
+          >
+            <UnarchiveOutlinedIcon />
+          </button>
+        ) : (
+          <button
+            className="note-btn"
+            onClick={() =>
+              archiveNote({
+                title: title,
+                _id: _id,
+                color: color,
+                text: text,
+                dateTime: dateTime,
+              })
+            }
+          >
+            <ArchiveOutlinedIcon />
+          </button>
+        )}
+
+        <button
+          className="note-btn"
+          onClick={() =>
+            isArchive
+              ? deleteArchiveNote({
+                  title: title,
+                  _id: _id,
+                  color: color,
+                  text: text,
+                  dateTime: dateTime,
+                })
+              : deleteNote({
+                  title: title,
+                  _id: _id,
+                  color: color,
+                  text: text,
+                  dateTime: dateTime,
+                })
+          }
+        >
           <DeleteOutlinedIcon style={{ cursor: "pointer" }} />
         </button>
       </div>
+
+      {enable && (
+        <div className="label-container">
+          <ul className="label-ul">
+            {arr.map(({ value, id }) => (
+              <li key={id} className="label-li">
+                <input
+                  id={id}
+                  type="checkbox"
+                  name={value}
+                  checked={tags.some((tag) => tag === value)}
+                  onChange={(e) => checkBoxHandler(e)}
+                />
+                <label htmlFor={id}>{value}</label>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {!enable && tags.length > 0 && (
+        <div className="label-chip-container">
+          {tags.map((labelName) => (
+            <LabelChip labelName={labelName} key={labelName} />
+          ))}
+        </div>
+      )}
       <div
         className="color-panel"
         style={enable ? { display: "flex" } : { display: "none" }}

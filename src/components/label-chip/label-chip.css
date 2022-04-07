@@ -1,0 +1,7 @@
+.label-chip{
+    border: 2px solid;
+    background-color: var(--color-secondary);
+    border-radius: 4px;
+    color: white;
+    padding: 0.25rem 0.5rem ;
+}

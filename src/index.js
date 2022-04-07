@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { LandingPage, HomePage, LoginPage } from "./routes";
+import { LandingPage, HomePage, LoginPage ,ArchivePage} from "./routes";
 import { ToastProvider } from "./context/toast-context";
 import { UserProvider } from "./context/user-context";
 import { NoteProvider } from "./context/note-context";
@@ -22,6 +22,7 @@ ReactDOM.render(
               <Route path="/" element={<LandingPage />} />
               <Route path="/" element={<App />}>
                 <Route path="home" element={<HomePage />} />
+                <Route path="archive" element={<ArchivePage />}/>
               </Route>
               <Route path="/login" element={<LoginPage />} />
             </Routes>

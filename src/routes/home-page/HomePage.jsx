@@ -6,7 +6,10 @@ const HomePage = () => {
   const { notesList } = useNote();
   return (
     <>
-      {notesList.map(({ enable, title, _id, color, text }) => (
+      {notesList.length === 0 && (
+        <h2 className="show-empty-header">No Notes to show. </h2>
+      )}
+      {notesList.map(({ enable, title, _id, color, text, dateTime, tags }) => (
         <Note
           key={_id}
           noteEnable={enable}
@@ -14,6 +17,9 @@ const HomePage = () => {
           _id={_id}
           noteColor={color}
           noteText={text}
+          isArchive={false}
+          dateTime={dateTime}
+          noteTags={tags}
         />
       ))}
     </>

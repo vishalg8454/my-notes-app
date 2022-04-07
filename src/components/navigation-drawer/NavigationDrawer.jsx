@@ -4,18 +4,34 @@ import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useNote } from "../../context/note-context";
+import { useEffect, useState } from "react";
 
 const NavigationDrawer = () => {
-  const { addBlankNote } = useNote();
+  const [sortState, setSortState] = useState("");
+
+  let navigate = useNavigate();
+
+  const { addBlankNote, sortNewToOld, sortOldToNew } = useNote();
+
+  useEffect(() => {
+    if(sortState === "new"){
+      sortNewToOld();
+    }
+    if(sortState === "old"){
+      sortOldToNew()
+    }
+  }, [sortState]);
+
   let activeStyle = {
     textDecoration: "underline",
     color: "#d54a31",
   };
 
-  function addNoteHandler(){
-      addBlankNote();
+  function addNoteHandler() {
+    navigate("/home");
+    addBlankNote();
   }
   return (
     <aside className="navigation-drawer">
@@ -42,7 +58,11 @@ const NavigationDrawer = () => {
             <span className="navigation-item-text">Labels</span>
           </li>
         </NavLink>
-        <NavLink to="/archive" className="navlink">
+        <NavLink
+          to="/archive"
+          className="navlink"
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        >
           <li className="navigation-item">
             <ArchiveOutlinedIcon
               className="navigation-icon"
@@ -70,7 +90,33 @@ const NavigationDrawer = () => {
           </li>
         </NavLink>
       </ul>
-      <button className="create-new-note-cta" onClick={addNoteHandler}>Create New Note</button>
+      <button className="create-new-note-cta" onClick={addNoteHandler}>
+        Create New Note
+      </button>
+
+      <div className="sort-container">
+        <p>Sort by - </p>
+        <div className="sort-div">
+          <input
+            id="newtoold"
+            type="radio"
+            name="sort"
+            value="new"
+            onChange={(e) => setSortState(e.target.value)}
+          />
+          <label htmlFor="newtoold">{" Date - Newer to Older"}</label>
+        </div>
+        <div className="sort-div">
+          <input
+            id="oldtonew"
+            type="radio"
+            name="sort"
+            value="old"
+            onChange={(e) => setSortState(e.target.value)}
+          />
+          <label htmlFor="oldtonew">{" Date - Older to Newer"}</label>
+        </div>
+      </div>
     </aside>
   );
 };

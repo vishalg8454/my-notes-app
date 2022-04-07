@@ -1,6 +1,22 @@
+.search-bar-container{
+    display: flex;
+}
 .search-bar{
     width: 100%;
-    height: 2rem;
+    height: 3rem;
     margin: 1rem 0rem;
     outline: none;
+    background-color: white;
+    border: 2px solid var(--color-dark-gray);
+    border-left: 0px;
+}
+.search-button{
+    height: 3rem;
+    align-self: center;
+    background-color: white;
+    border: 2px solid var(--color-dark-gray);
+    border-right: 0px;
+    color: var(--color-secondary);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
