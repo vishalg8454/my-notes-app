@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { createContext, useContext, useState } from "react";
 import { useToast } from "./toast-context";
@@ -6,13 +6,14 @@ import { useToast } from "./toast-context";
 const UserContext = createContext(null);
 
 const useUser = () => useContext(UserContext);
+const tokenFromStorage = localStorage.getItem("token");
 
 const UserProvider = ({ children }) => {
   const navigate = useNavigate();
   const { showToast, message } = useToast();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [encodedToken, setEncodedToken] = useState(null);
+  const [encodedToken, setEncodedToken] = useState(tokenFromStorage);
 
   async function loginUser({ email, password }) {
     try {
@@ -22,6 +23,7 @@ const UserProvider = ({ children }) => {
       });
 
       setEncodedToken(userData.data.encodedToken);
+      localStorage.setItem("token", userData.data.encodedToken);
       setFirstName((p) => userData.data.foundUser.firstName);
       setLastName((p) => userData.data.foundUser.lastName);
       showToast({
