@@ -70,7 +70,7 @@ const LoginPage = () => {
           Use guest credentials
         </button>
         <button className="btn btn-link">
-          <Link to="/">Create New Account</Link>
+          <Link to="/signup">Create New Account</Link>
         </button>
       </form>
     </div>

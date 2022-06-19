@@ -36,9 +36,31 @@ const UserProvider = ({ children }) => {
     }
   }
 
+  async function signupUser({ email, password, firstName, lastName }) {
+    try {
+      const userData = await axios.post("/api/auth/signup", {
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+      });
+      setEncodedToken(userData.data.encodedToken);
+      localStorage.setItem("token", userData.data.encodedToken);
+      setFirstName((p) => userData.data.createdUser.firstName);
+      setLastName((p) => userData.data.createdUser.lastName);
+      showToast({
+        message: `Welcome ${userData.data.createdUser.firstName} ${userData.data.createdUser.lastName}`,
+        type: "success",
+      });
+      navigate("/home");
+    } catch (error) {
+      showToast({ message: "Unable to sign up", type: "error" });
+    }
+  }
+
   return (
     <UserContext.Provider
-      value={{ encodedToken, firstName, lastName, loginUser }}
+      value={{ encodedToken, firstName, lastName, loginUser, signupUser }}
     >
       {children}
     </UserContext.Provider>
