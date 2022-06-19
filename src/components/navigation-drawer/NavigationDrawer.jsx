@@ -16,11 +16,11 @@ const NavigationDrawer = () => {
   const { addBlankNote, sortNewToOld, sortOldToNew } = useNote();
 
   useEffect(() => {
-    if(sortState === "new"){
+    if (sortState === "new") {
       sortNewToOld();
     }
-    if(sortState === "old"){
-      sortOldToNew()
+    if (sortState === "old") {
+      sortOldToNew();
     }
   }, [sortState]);
 
@@ -49,7 +49,11 @@ const NavigationDrawer = () => {
             <span className="navigation-item-text">Home</span>
           </li>
         </NavLink>
-        <NavLink to="/labels" className="navlink">
+        <NavLink
+          to="/labels"
+          className="navlink"
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        >
           <li className="navigation-item">
             <LabelOutlinedIcon
               className="navigation-icon"
