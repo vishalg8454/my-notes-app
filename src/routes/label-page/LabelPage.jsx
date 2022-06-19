@@ -17,6 +17,9 @@ const LabelPage = () => {
 
   return (
     <main>
+      {labels.length === 0 && (
+        <h2 className="show-empty-header">No Labels to show.</h2>
+      )}
       {labels.map((label) => {
         return (
           <>
