@@ -18,7 +18,9 @@ const LandingPage = () => {
             Mange your daily tasks and workflow in a modern way and boost your
             efficiency without any efforts.
           </p>
+          <Link to="/signup">
           <button className="landing-cta">Join Now</button>
+          </Link>
           <Link to="/login">
             <button className="btn btn-link landing-signup">
               Already have an account?

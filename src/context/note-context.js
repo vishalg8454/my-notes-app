@@ -26,7 +26,7 @@ const NoteProvider = ({ children }) => {
           _id: 244,
           color: "white",
           text: "",
-          dateTime: date.toLocaleString(),
+          dateTime: date,
           tags: [],
         },
       ]);
@@ -235,17 +235,18 @@ const NoteProvider = ({ children }) => {
   }
 
   function sortNewToOld() {
-    const temp = notesList;
-    temp.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
-    setNotesList(() => temp);
+    notesList.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
     navigate("/home");
   }
 
   function sortOldToNew() {
-    const temp = notesList;
-    temp.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
-    setNotesList(() => temp);
+    notesList.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
     navigate("/home");
+  }
+
+  function resetNotes() {
+    setNotesList([]);
+    setArchiveList([]);
   }
 
   return (
@@ -261,6 +262,7 @@ const NoteProvider = ({ children }) => {
         deleteArchiveNote,
         sortNewToOld,
         sortOldToNew,
+        resetNotes,
       }}
     >
       {children}

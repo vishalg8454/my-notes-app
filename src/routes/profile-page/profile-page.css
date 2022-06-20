@@ -1,0 +1,22 @@
+.login-cta {
+  width: 100%;
+  padding: 0.4rem 1rem;
+  font-size: 1.2rem;
+  border: none;
+  font: inherit;
+  margin-top: 2rem;
+  font-size: x-large;
+  cursor: pointer;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  width: fit-content;
+}
+.login-cta:hover {
+  background-color: var(--color-secondary);
+}
+.name {
+  font-size: 2rem;
+}
+.note-count {
+  font-size: 1.2rem;
+}
