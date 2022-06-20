@@ -248,6 +248,11 @@ const NoteProvider = ({ children }) => {
     navigate("/home");
   }
 
+  function resetNotes() {
+    setNotesList([]);
+    setArchiveList([]);
+  }
+
   return (
     <NoteContext.Provider
       value={{
@@ -261,6 +266,7 @@ const NoteProvider = ({ children }) => {
         deleteArchiveNote,
         sortNewToOld,
         sortOldToNew,
+        resetNotes,
       }}
     >
       {children}

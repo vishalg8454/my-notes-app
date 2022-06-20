@@ -1,9 +1,14 @@
 import "./home-page.css";
 import { Note } from "../../components";
 import { useNote } from "../../context/note-context";
+import { useUser } from "../../context/user-context";
 
 const HomePage = () => {
   const { notesList } = useNote();
+  const { encodedToken } = useUser();
+  if (!encodedToken) {
+    return <h2 className="show-empty-header">Login to view your notes.</h2>;
+  }
   return (
     <>
       {notesList.length === 0 && (

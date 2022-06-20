@@ -58,9 +58,23 @@ const UserProvider = ({ children }) => {
     }
   }
 
+  const logout = () => {
+    setFirstName("");
+    setLastName("");
+    setEncodedToken(null);
+    showToast({ message: "Logged out successfully", type: "success" });
+    localStorage.removeItem("token");
+  };
   return (
     <UserContext.Provider
-      value={{ encodedToken, firstName, lastName, loginUser, signupUser }}
+      value={{
+        encodedToken,
+        firstName,
+        lastName,
+        loginUser,
+        signupUser,
+        logout,
+      }}
     >
       {children}
     </UserContext.Provider>

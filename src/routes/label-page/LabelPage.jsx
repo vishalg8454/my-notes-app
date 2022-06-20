@@ -1,11 +1,13 @@
 import "./label-page.css";
 import { useNote } from "../../context/note-context";
+import { useUser } from "../../context/user-context";
 import { useEffect, useState } from "react";
 import { LabelChip, Note } from "../../components";
 
 const LabelPage = () => {
   const { notesList } = useNote();
   const [labels, setLabels] = useState([]);
+  const {encodedToken} = useUser();
 
   useEffect(() => {
     notesList.forEach((note) =>
@@ -14,6 +16,10 @@ const LabelPage = () => {
       )
     );
   }, [notesList]);
+
+  if (!encodedToken) {
+    return <h2 className="show-empty-header">Login to view your labels.</h2>;
+  }
 
   return (
     <main>

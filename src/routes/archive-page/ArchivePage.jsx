@@ -1,9 +1,14 @@
 import "./archive-page.css";
 import { useNote } from "../../context/note-context";
+import { useUser } from "../../context/user-context";
 import { Note } from "../../components";
 
 const ArchivePage = () => {
   const { archiveList } = useNote();
+  const { encodedToken } = useUser();
+  if (!encodedToken) {
+    return <h2 className="show-empty-header">Login to view your archives.</h2>;
+  }
   return (
     <>
       {archiveList.length === 0 && (
