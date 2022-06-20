@@ -75,15 +75,6 @@ const NavigationDrawer = () => {
             <span className="navigation-item-text"> Archive</span>
           </li>
         </NavLink>
-        <NavLink to="/trash" className="navlink">
-          <li className="navigation-item">
-            <DeleteOutlineOutlinedIcon
-              className="navigation-icon"
-              sx={{ fontSize: 32 }}
-            />
-            <span className="navigation-item-text">Trash</span>
-          </li>
-        </NavLink>
         <NavLink to="/profile" className="navlink">
           <li className="navigation-item">
             <AccountCircleOutlinedIcon
