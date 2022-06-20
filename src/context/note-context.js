@@ -235,12 +235,12 @@ const NoteProvider = ({ children }) => {
   }
 
   function sortNewToOld() {
-    notesList.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
+    notesList.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
     navigate("/home");
   }
 
   function sortOldToNew() {
-    notesList.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
+    notesList.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
     navigate("/home");
   }
 
