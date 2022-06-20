@@ -12,7 +12,7 @@ const HomePage = () => {
   return (
     <>
       {notesList.length === 0 && (
-        <h2 className="show-empty-header">No Notes to show. </h2>
+        <h2 className="show-empty-header">No Notes to show. Time to create one</h2>
       )}
       {notesList.map(({ enable, title, _id, color, text, dateTime, tags }) => (
         <Note
